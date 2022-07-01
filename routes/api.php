@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('auth/login',   [LoginController::class, 'login'])->middleware(['json.response', 'cors'])->name('auth.login');
+Route::post('auth/logout',  [LoginController::class, 'logout'])->middleware(['auth:api', 'json.response', 'cors'])->name('auth.logout');
+
+Route::get('users',          [UserController::class, 'index'])->name('users.index')->middleware('auth:api', 'cors');
+
+Route::prefix('room')->name('room.')->middleware('cors', 'auth:api')->group(function () {
+    Route::get('myRooms',           [RoomController::class, 'show'])->name('show');
+    Route::post('create',           [RoomController::class, 'create'])->name('create');
+    Route::post('join',             [RoomController::class, 'join'])->name('join');
 });
