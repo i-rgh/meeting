@@ -24,7 +24,7 @@ class LoginController extends Controller
         if (!$user) {
             $response = ["message" => 'کاربری با این ایمیل پیدا نشد'];
             return response($response, 422);
-        } else {
+        } 
             if (!Auth::attempt(array($vartype => $request->email_username, 'password' => $request->password))) {
                 $response = ["message" => "رمز عبور صحیح نمی باشد"];
                 return response($response, 422);
@@ -32,7 +32,7 @@ class LoginController extends Controller
                 $token = auth()->user()->createToken(auth()->user()->emmail);
                 return new LoginResource($token);
             }
-        }
+        
     }
 
     /**

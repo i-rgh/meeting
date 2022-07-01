@@ -21,7 +21,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('auth/login',   [LoginController::class, 'login'])->middleware(['json.response', 'cors'])->name('auth.login');
+Route::post('auth/login',   [LoginController::class, 'login'])->middleware(['json.response', 'cors' , 'throttle:5,1'])->name('auth.login');
 Route::post('auth/logout',  [LoginController::class, 'logout'])->middleware(['auth:api', 'json.response', 'cors'])->name('auth.logout');
 
 Route::get('users',          [UserController::class, 'index'])->name('users.index')->middleware('auth:api', 'cors');
