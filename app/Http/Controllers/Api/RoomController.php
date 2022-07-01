@@ -16,7 +16,7 @@ use Throwable;
 class RoomController extends Controller
 {
     /**
-     * Log the user out (Invalidate the token).
+     * user can create room
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -32,7 +32,7 @@ class RoomController extends Controller
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * join to room
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -50,7 +50,7 @@ class RoomController extends Controller
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * show user rooms
      *
      * @return \Illuminate\Http\JsonResponse
      */
